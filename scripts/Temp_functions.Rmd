@@ -66,6 +66,10 @@ library(ggplot2)
 
 # Temperature range
 temp <- seq(-10, 50, by = 0.1)
+
+# Output directories are relative to this Rmd in analysis/.
+fig_dir <- "../figures"
+dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 ```
 
 
@@ -183,7 +187,7 @@ print(p_a)
 ####### Save figure ##########
 
 ggsave(
-  filename = "biting_rate.jpg",
+  filename = file.path(fig_dir, "biting_rate.jpg"),
   plot = p_a,
   width = 8,
   height = 5,
@@ -290,7 +294,7 @@ print(p_b)
 ####### Save figure ##########
 
 ggsave(
-  filename = "transmission_vector_to_human.jpg",
+  filename = file.path(fig_dir, "transmission_vector_to_human.jpg"),
   plot = p_b,
   width = 8,
   height = 5,
@@ -396,7 +400,7 @@ print(p_c)
 ####### Save figure ##########
 
 ggsave(
-  filename = "transmission_human_to_vector.jpg",
+  filename = file.path(fig_dir, "transmission_human_to_vector.jpg"),
   plot = p_c,
   width = 8,
   height = 5,
@@ -641,7 +645,7 @@ print(p_mu)
 ####### Save figure ##########
 
 ggsave(
-  filename = "adult_mosquito_mortality_rate.jpg",
+  filename = file.path(fig_dir, "adult_mosquito_mortality_rate.jpg"),
   plot = p_mu,
   width = 8,
   height = 5,
@@ -800,7 +804,7 @@ print(p_PDR)
 ####### Save figure ##########
 
 ggsave(
-  filename = "parasite_development_rate.jpg",
+  filename = file.path(fig_dir, "parasite_development_rate.jpg"),
   plot = p_PDR,
   width = 8,
   height = 5,
@@ -907,7 +911,7 @@ print(p_EFD)
 ####### Save figure ##########
 
 ggsave(
-  filename = "fecundity.jpg",
+  filename = file.path(fig_dir, "fecundity.jpg"),
   plot = p_EFD,
   width = 8,
   height = 5,
@@ -995,7 +999,7 @@ print(p_pEA)
 ####### Save figure ##########
 
 ggsave(
-  filename = "egg_adult_survival_probability.jpg",
+  filename = file.path(fig_dir, "egg_adult_survival_probability.jpg"),
   plot = p_pEA,
   width = 8,
   height = 5,
@@ -1103,7 +1107,7 @@ print(p_MDR)
 ####### Save figure ##########
 
 ggsave(
-  filename = "aquatic_maturation.jpg",
+  filename = file.path(fig_dir, "aquatic_maturation.jpg"),
   plot = p_MDR,
   width = 8,
   height = 5,
