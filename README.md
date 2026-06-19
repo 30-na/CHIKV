@@ -2,9 +2,6 @@
 
 This repository organizes temperature-dependent functions used to study chikungunya transmission risk. The current work checks individual thermal response functions, compares sources from the parameter table, and starts building the Mordecai-style baseline \(R_0(T)\) model for *Aedes aegypti* and *Aedes albopictus*.
 
-## Open Interactive App
-
-[Launch the CHIKV R0 Explorer](https://30-na.github.io/CHIKV/)
 
 ## Baseline Model
 
@@ -50,11 +47,9 @@ docs/      project notes, parameter tables, and reference files
 
 ## Interactive Plots
 
-The interactive \(R_0(T)\) explorer is available as the GitHub Pages homepage through `index.html`.
+[The CHIKV R0 Explorer](https://30-na.github.io/CHIKV/)
 
-The same app is also kept here:
 
-- [interactive/R0_explorer.html](interactive/R0_explorer.html)
 
 It lets users choose mosquito species, temperature range, and one thermal function for each model parameter. The app recalculates the curve directly and reports zeros or non-finite values instead of silently fixing them.
 
