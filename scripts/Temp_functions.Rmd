@@ -65,9 +65,9 @@ $$
 library(ggplot2)
 
 # Temperature range
-temp <- seq(-10, 50, by = 0.1)
+temp <- seq(15, 36, by = 0.1)
 
-# Output directories are relative to this Rmd in analysis/.
+# Output directories are relative to this Rmd in scripts/.
 fig_dir <- "../figures"
 dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 ```
@@ -90,7 +90,7 @@ a is the per-mosquito biting rate.
 # Cited as Original Source: Caminade et al., 2017; Focks et al., 1995; Kakarla et al., 2019; Liu-Helmersson et al., 2014; Mclean et al., 1974; Scott et al., 2000
 a_aegypti_caminade_2017 <- function(T) {
   
-  b_m <- rep(NA_real_, length(T))
+  b_m <- rep(0, length(T))
   
   idx1 <- T >= 21 & T <= 32
   
@@ -104,7 +104,7 @@ a_aegypti_caminade_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 a_aegypti_mordecai_2017 <- function(T) {
   
-  a <- rep(NA_real_, length(T))
+  a <- rep(0, length(T))
   
   idx1 <- T > 13.35 & T < 40.08
   
@@ -118,7 +118,7 @@ a_aegypti_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 a_albopictus_mordecai_2017 <- function(T) {
   
-  a <- rep(NA_real_, length(T))
+  a <- rep(0, length(T))
   
   idx1 <- T > 10.25 & T < 38.32
   
@@ -212,7 +212,7 @@ b is the proportion of infectious bites that infect susceptible humans.
 # Cited as Original Source: Lambrechts et al., 2011
 b_aegypti_lambrechts_2011 <- function(T) {
   
-  b_prob <- rep(NA_real_, length(T))
+  b_prob <- rep(0, length(T))
   
   idx1 <- T >= 12.4 & T <= 26.1
   idx2 <- T > 26.1 & T <= 32.5
@@ -228,7 +228,7 @@ b_aegypti_lambrechts_2011 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 b_aegypti_mordecai_2017 <- function(T) {
   
-  b_prob <- rep(NA_real_, length(T))
+  b_prob <- rep(0, length(T))
   
   idx1 <- T > 17.05 & T < 35.83
   
@@ -242,7 +242,7 @@ b_aegypti_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 b_albopictus_mordecai_2017 <- function(T) {
   
-  b_prob <- rep(NA_real_, length(T))
+  b_prob <- rep(0, length(T))
   
   idx1 <- T > 15.84 & T < 36.40
   
@@ -320,7 +320,7 @@ c is the proportion of bites on infected humans that infect previously uninfecte
 # Cited as Original Source: Lambrechts et al., 2011
 c_aegypti_lambrechts_2011 <- function(T) {
   
-  c <- rep(NA_real_, length(T))
+  c <- rep(0, length(T))
   
   idx1 <- T > 12.286 & T < 32.461
   
@@ -334,7 +334,7 @@ c_aegypti_lambrechts_2011 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 c_aegypti_mordecai_2017 <- function(T) {
   
-  c <- rep(NA_real_, length(T))
+  c <- rep(0, length(T))
   
   idx1 <- T > 12.22 & T < 37.46
   
@@ -348,7 +348,7 @@ c_aegypti_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 c_albopictus_mordecai_2017 <- function(T) {
   
-  c <- rep(NA_real_, length(T))
+  c <- rep(0, length(T))
   
   idx1 <- T > 3.62 & T < 36.82
   
@@ -433,7 +433,7 @@ For Mordecai et al. 2017, the table gives adult mosquito lifespan, $lf(T)$, not 
 # Cited as Original Source: Caminade et al., 2017
 mu_aegypti_caminade_2017 <- function(T) {
   
-  mu <- rep(NA_real_, length(T))
+  mu <- rep(0, length(T))
   
   idx1 <- T < 22
   idx2 <- T >= 22
@@ -473,7 +473,7 @@ mu_albopictus_poletti_2011 <- function(T) {
 # Cited as Original Source: Ruiz-Moreno et al., 2012
 mu_albopictus_ruiz_moreno_2012 <- function(T) {
   
-  mu <- rep(NA_real_, length(T))
+  mu <- rep(0, length(T))
   
   idx1 <- T < -5
   idx2 <- T >= -5 & T < 15
@@ -493,7 +493,7 @@ mu_albopictus_ruiz_moreno_2012 <- function(T) {
 # Cited as Original Source: Brady et al., 2013; Caminade et al., 2017; Zardini et al., 2024
 mu_albopictus_brady_2013 <- function(T) {
   
-  mu <- rep(NA_real_, length(T))
+  mu <- rep(0, length(T))
   
   idx1 <- T < 15
   idx2 <- T >= 15 & T < 26.3
@@ -528,7 +528,7 @@ mu_albopictus_ng_2017 <- function(T) {
 # Table gives lifespan; mortality is calculated as mu(T) = 1 / lf(T).
 mu_aegypti_mordecai_2017 <- function(T) {
   
-  mu <- rep(NA_real_, length(T))
+  mu <- rep(0, length(T))
   
   idx1 <- T > 9.16 & T < 37.73
   
@@ -544,7 +544,7 @@ mu_aegypti_mordecai_2017 <- function(T) {
 # Table gives lifespan; mortality is calculated as mu(T) = 1 / lf(T).
 mu_albopictus_mordecai_2017 <- function(T) {
   
-  mu <- rep(NA_real_, length(T))
+  mu <- rep(0, length(T))
   
   idx1 <- T > 13.41 & T < 31.51
   
@@ -670,7 +670,7 @@ PDR is the parasite development rate (i.e., the inverse of the extrinsic incubat
 # Cited as Original Source: Mordecai et al., 2017
 PDR_albopictus_mordecai_2017 <- function(T) {
   
-  PDR <- rep(NA_real_, length(T))
+  PDR <- rep(0, length(T))
   
   idx1 <- T > 10.39 & T < 43.05
   
@@ -684,7 +684,7 @@ PDR_albopictus_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 PDR_aegypti_mordecai_2017 <- function(T) {
   
-  PDR <- rep(NA_real_, length(T))
+  PDR <- rep(0, length(T))
   
   idx1 <- T > 10.68 & T < 45.90
   
@@ -728,7 +728,7 @@ PDR_albopictus_chan_johansson_2012_alt <- function(T) {
 # Cited as Original Source: Ruiz-Moreno et al., 2012
 PDR_albopictus_ruiz_moreno_2012 <- function(T) {
   
-  EIP <- rep(NA_real_, length(T))
+  EIP <- rep(0, length(T))
   
   idx1 <- T < 10
   idx2 <- T >= 10 & T <= 32
@@ -846,7 +846,7 @@ EFD_aegypti_yang_2009 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 EFD_albopictus_mordecai_2017 <- function(T) {
   
-  EFD <- rep(NA_real_, length(T))
+  EFD <- rep(0, length(T))
   
   idx1 <- T > 8.02 & T < 35.65
   
@@ -860,7 +860,7 @@ EFD_albopictus_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 EFD_aegypti_mordecai_2017 <- function(T) {
   
-  EFD <- rep(NA_real_, length(T))
+  EFD <- rep(0, length(T))
   
   idx1 <- T > 14.58 & T < 34.61
   
@@ -940,7 +940,7 @@ $p_{EA}$ is the mosquito egg-to-adult survival probability
 # Cited as Original Source: Mordecai et al., 2017
 pEA_aegypti_mordecai_2017 <- function(T) {
   
-  pEA <- rep(NA_real_, length(T))
+  pEA <- rep(0, length(T))
   
   idx1 <- T > 13.56 & T < 38.29
   
@@ -954,7 +954,7 @@ pEA_aegypti_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 pEA_albopictus_mordecai_2017 <- function(T) {
   
-  pEA <- rep(NA_real_, length(T))
+  pEA <- rep(0, length(T))
   
   idx1 <- T > 9.04 & T < 39.33
   
@@ -1042,7 +1042,7 @@ phi_v_aegypti_zhu_2019 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 MDR_aegypti_mordecai_2017 <- function(T) {
   
-  MDR <- rep(NA_real_, length(T))
+  MDR <- rep(0, length(T))
   
   idx1 <- T > 11.36 & T < 39.17
   
@@ -1056,7 +1056,7 @@ MDR_aegypti_mordecai_2017 <- function(T) {
 # Cited as Original Source: Mordecai et al., 2017
 MDR_albopictus_mordecai_2017 <- function(T) {
   
-  MDR <- rep(NA_real_, length(T))
+  MDR <- rep(0, length(T))
   
   idx1 <- T > 8.60 & T < 39.66
   
@@ -1109,6 +1109,123 @@ print(p_MDR)
 ggsave(
   filename = file.path(fig_dir, "aquatic_maturation.jpg"),
   plot = p_MDR,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+\newpage
+
+# Mordecai R0
+
+This section combines the default Mordecai et al. 2017 thermal functions into the baseline temperature-dependent $R_0(T)$ expression.I set $N=1$ and $r=1$ here.
+
+For *Ae. albopictus*, the sharp jump above about 31.5°C occurs because the Mordecai mortality function becomes zero outside its valid range, and $\mu(T)^3$ is in the denominator of $R_0(T)$.
+
+```{r mordecai_r0, message=FALSE, warning=FALSE, fig.cap="Mordecai R0 thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Mordecai R0 ##########
+
+
+relative_R0_mordecai <- function(a, b, c, mu, PDR, EFD, pEA, MDR, N = 1, r = 1) {
+
+  R0 <- sqrt(
+    (
+      a^2 *
+        b *
+        c *
+        exp(-(mu / PDR)) *
+        EFD *
+        pEA *
+        MDR
+    ) /
+      (N * r * mu^3)
+  )
+  
+  return(R0)
+}
+
+
+####### Calculate R0 ##########
+
+r0_aegypti_data <- data.frame(
+  temp = temp,
+  R0 = relative_R0_mordecai(
+    a = a_aegypti_mordecai_2017(temp),
+    b = b_aegypti_mordecai_2017(temp),
+    c = c_aegypti_mordecai_2017(temp),
+    mu = mu_aegypti_mordecai_2017(temp),
+    PDR = PDR_aegypti_mordecai_2017(temp),
+    EFD = EFD_aegypti_mordecai_2017(temp),
+    pEA = pEA_aegypti_mordecai_2017(temp),
+    MDR = MDR_aegypti_mordecai_2017(temp)
+  )
+)
+
+r0_albopictus_data <- data.frame(
+  temp = temp,
+  R0 = relative_R0_mordecai(
+    a = a_albopictus_mordecai_2017(temp),
+    b = b_albopictus_mordecai_2017(temp),
+    c = c_albopictus_mordecai_2017(temp),
+    mu = mu_albopictus_mordecai_2017(temp),
+    PDR = PDR_albopictus_mordecai_2017(temp),
+    EFD = EFD_albopictus_mordecai_2017(temp),
+    pEA = pEA_albopictus_mordecai_2017(temp),
+    MDR = MDR_albopictus_mordecai_2017(temp)
+  )
+)
+
+
+####### Plot Ae. aegypti R0 ##########
+
+p_r0_aegypti <- ggplot(r0_aegypti_data, aes(x = temp, y = R0)) +
+  geom_line(linewidth = 1, color = "#1f78b4") +
+  labs(
+    x = "Temperature (C)",
+    y = "Relative R0(T)",
+    title = "Mordecai R0 thermal function for Ae. aegypti"
+  ) +
+  theme_bw()
+
+print(p_r0_aegypti)
+
+
+####### Save Ae. aegypti R0 figure ##########
+
+ggsave(
+  filename = file.path(fig_dir, "r0_aegypti_mordecai.jpg"),
+  plot = p_r0_aegypti,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+
+
+####### Plot Ae. albopictus R0 ##########
+
+p_r0_albopictus <- ggplot(r0_albopictus_data, aes(x = temp, y = R0)) +
+  geom_line(linewidth = 1, color = "#33a02c") +
+  labs(
+    x = "Temperature (C)",
+    y = "Relative R0(T)",
+    title = "Mordecai R0 thermal function for Ae. albopictus"
+  ) +
+  theme_bw()
+
+print(p_r0_albopictus)
+
+
+####### Save Ae. albopictus R0 figure ##########
+
+ggsave(
+  filename = file.path(fig_dir, "r0_albopictus_mordecai.jpg"),
+  plot = p_r0_albopictus,
   width = 8,
   height = 5,
   dpi = 300,
