@@ -174,7 +174,7 @@
 <body>
   <header>
     <h1>CHIKV R0 Explorer</h1>
-    <p>Choose a mosquito species, thermal response functions, and temperature range. The plot recalculates directly from the selected functions and reports zeros or non-finite values instead of silently fixing them.</p>
+    <p>Choose a mosquito species, thermal response functions, and temperature range. The plot recalculates directly from the selected functions.</p>
   </header>
 
   <main>
@@ -248,7 +248,6 @@
           <input id="r" type="number" value="1" min="0" step="0.01">
         </div>
       </div>
-      <div class="small">For relative thermal shape, keep N = 1 and r = 1.</div>
     </aside>
 
     <section>
@@ -398,7 +397,10 @@
       const r = Number(document.getElementById("r").value);
       const temps = makeTemps(Math.min(minTemp, maxTemp), Math.max(minTemp, maxTemp));
       const rows = [];
-      const issues = {};
+      const checks = {
+        nonFiniteInput: {},
+        nonFiniteR0: 0
+      };
 
       temps.forEach(T => {
         const vals = {};
@@ -420,27 +422,27 @@
         );
 
         Object.entries(vals).forEach(([key, value]) => {
-          if (!Number.isFinite(value) || value <= 0) {
-            issues[key] = (issues[key] || 0) + 1;
+          if (!Number.isFinite(value)) {
+            checks.nonFiniteInput[key] = (checks.nonFiniteInput[key] || 0) + 1;
           }
         });
 
-        if (!Number.isFinite(N) || N <= 0) {
-          issues.N = (issues.N || 0) + 1;
+        if (!Number.isFinite(N)) {
+          checks.nonFiniteInput.N = (checks.nonFiniteInput.N || 0) + 1;
         }
 
-        if (!Number.isFinite(r) || r <= 0) {
-          issues.r = (issues.r || 0) + 1;
+        if (!Number.isFinite(r)) {
+          checks.nonFiniteInput.r = (checks.nonFiniteInput.r || 0) + 1;
         }
 
         if (!Number.isFinite(R0)) {
-          issues["R0 non-finite"] = (issues["R0 non-finite"] || 0) + 1;
+          checks.nonFiniteR0 += 1;
         }
 
         rows.push({ temp: T, R0, vals });
       });
 
-      return { rows, issues, species };
+      return { rows, checks, species };
     }
 
     function updatePlot() {
@@ -455,23 +457,40 @@
       const warning = document.getElementById("warning");
 
       if (finiteRows.length === 0) {
-        summary.textContent = "No finite R0 values in the selected temperature range.";
+        summary.textContent = `Undefined R0 values: ${result.rows.length} of ${result.rows.length}. No finite R0 values in the selected temperature range.`;
       } else {
+        const undefinedCount = result.rows.length - finiteRows.length;
         const peak = finiteRows.reduce((best, d) => d.R0 > best.R0 ? d : best, finiteRows[0]);
-        summary.textContent = `Finite R0 values: ${finiteRows.length} of ${result.rows.length}. Peak finite R0 = ${format(peak.R0)} at ${peak.temp.toFixed(1)} C.`;
+        summary.textContent = `Undefined R0 values: ${undefinedCount} of ${result.rows.length}. Peak finite R0 = ${format(peak.R0)} at ${peak.temp.toFixed(1)} C.`;
       }
 
-      const issueLines = Object.entries(result.issues)
-        .sort((a, b) => b[1] - a[1])
-        .map(([name, count]) => `${name}: ${count} temperature values`);
+      const checkLines = [];
+      addCheckSection(checkLines, "Input values non-finite", result.checks.nonFiniteInput);
 
-      if (issueLines.length > 0) {
+      if (result.checks.nonFiniteR0 > 0) {
+        checkLines.push(`R0 non-finite: ${result.checks.nonFiniteR0} temperature values`);
+      }
+
+      if (checkLines.length > 0) {
         warning.style.display = "block";
-        warning.textContent = "Checks from direct calculation:\n" + issueLines.join("\n");
+        warning.textContent = "Checks from direct calculation:\n" + checkLines.join("\n");
       } else {
         warning.style.display = "none";
         warning.textContent = "";
       }
+    }
+
+    function addCheckSection(lines, title, values) {
+      const entries = Object.entries(values).sort((a, b) => b[1] - a[1]);
+
+      if (entries.length === 0) {
+        return;
+      }
+
+      lines.push(title + ":");
+      entries.forEach(([name, count]) => {
+        lines.push(`  ${name}: ${count} temperature values`);
+      });
     }
 
     function drawPlot(rows, species) {
