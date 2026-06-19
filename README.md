@@ -2,6 +2,10 @@
 
 This repository organizes temperature-dependent functions used to study chikungunya transmission risk. The current work checks individual thermal response functions, compares sources from the parameter table, and starts building the Mordecai-style baseline \(R_0(T)\) model for *Aedes aegypti* and *Aedes albopictus*.
 
+## Open Interactive App
+
+[Launch the CHIKV R0 Explorer](https://30-na.github.io/CHIKV/)
+
 ## Baseline Model
 
 The baseline reproduction number follows the Mordecai-style temperature-dependent form:
