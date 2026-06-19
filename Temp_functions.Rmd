@@ -1,0 +1,1119 @@
+---
+title: "Thermal Response Functions for Chikungunya Transmission Risk"
+author: "Sina Mokhtar"
+output:
+  pdf_document:
+    fig_caption: true
+geometry: margin=1in
+header-includes:
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Before building the reproduction number model, I first examine the individual temperature-dependent functions used in the model. The purpose is to make sure each function behaves as expected over the temperature range. After checking and approving these functions separately, I will use them in the full $R_0(T)$ model. We use the Mordecai et al. model as the baseline. In this model, the basic reproduction number depends on temperature:
+
+$$
+R_0(T)=
+\sqrt{
+\frac{
+a(T)^2 b(T)c(T)e^{-(\frac{\mu(T)}{PDR(T)})}EFD(T)p_{EA}(T)MDR(T)
+}{
+N r \mu(T)^3
+}
+}
+$$
+
+The temperature-dependent functions are:
+
+$$
+a(T) = \text{biting rate}
+$$
+
+$$
+b(T) = \text{vector-to-human transmission probability}
+$$
+
+$$
+c(T) = \text{human-to-vector transmission probability}
+$$
+
+$$
+\mu(T) = \text{adult mosquito mortality rate}
+$$
+
+$$
+PDR(T) = \text{parasite development rate}
+$$
+
+$$
+EFD(T) = \text{eggs per female per day}
+$$
+
+$$
+pEA(T) = \text{egg-to-adult survival probability}
+$$
+
+$$
+MDR(T) = \text{mosquito development rate}
+$$
+```{r, echo= F}
+library(ggplot2)
+
+# Temperature range
+temp <- seq(-10, 50, by = 0.1)
+```
+
+
+\newpage 
+
+# Biting rate
+
+a is the per-mosquito biting rate.
+
+* The Mordecai biting-rate functions were evaluated only where they are positive: $13.35<T<40.08$ for *Ae. aegypti* and $10.25<T<38.32$ for *Ae. albopictus*.
+* Ae. albopictus biting rate is $\sqrt{(38.32-T)}$ not $\sqrt{(38.31-T)}$
+
+```{r biting_rate, message=FALSE, warning=FALSE, fig.cap="Biting rate thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Biting Rate ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Caminade et al., 2017; Focks et al., 1995; Kakarla et al., 2019; Liu-Helmersson et al., 2014; Mclean et al., 1974; Scott et al., 2000
+a_aegypti_caminade_2017 <- function(T) {
+  
+  b_m <- rep(NA_real_, length(T))
+  
+  idx1 <- T >= 21 & T <= 32
+  
+  b_m[idx1] <- 0.0943 + 0.0043 * T[idx1]
+  
+  return(b_m)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+a_aegypti_mordecai_2017 <- function(T) {
+  
+  a <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 13.35 & T < 40.08
+  
+  a[idx1] <- 2.02E-4 * T[idx1] * (T[idx1] - 13.35) * sqrt(40.08 - T[idx1])
+  
+  return(a)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+a_albopictus_mordecai_2017 <- function(T) {
+  
+  a <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 10.25 & T < 38.32
+  
+  a[idx1] <- 1.93E-4 * T[idx1] * (T[idx1] - 10.25) * sqrt(38.32 - T[idx1])
+  
+  return(a)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Caminade et al., 2017; Liu-Helmersson et al., 2014; Scott et al., 2000; Zardini et al., 2024
+a_albopictus_caminade_2017 <- function(T) {
+  
+  a <- 0.5 * (0.0043 * T + 0.0943)
+  
+  return(a)
+}
+
+
+####### Make data frame ##########
+
+biting_data <- rbind(
+  data.frame(
+    temp = temp,
+    a = a_aegypti_caminade_2017(temp),
+    function_name = "Ae. aegypti - Caminade/Focks/..."
+  ),
+  
+  data.frame(
+    temp = temp,
+    a = a_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    a = a_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    a = a_albopictus_caminade_2017(temp),
+    function_name = "Ae. albopictus - Caminade/..."
+  )
+)
+
+
+
+####### Plot biting rate ##########
+
+p_a <- ggplot(biting_data, aes(x = temp, y = a, color = function_name)) +
+  geom_line(linewidth = 1) +
+  coord_cartesian(ylim = c(0, 0.4)) +
+  labs(
+    x = "Temperature (C)",
+    y = "Biting rate, a(T)",
+    color = "Function",
+    title = "Biting rate thermal functions"
+  ) +
+  theme_bw()
+
+print(p_a)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "biting_rate.jpg",
+  plot = p_a,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+\newpage
+
+# Transmission Probability (Vector -> Human)
+
+b is the proportion of infectious bites that infect susceptible humans.
+
+```{r transmission_vector_to_human, message=FALSE, warning=FALSE, fig.cap="Transmission probability vector to human thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Transmission Probability Vector -> Human ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Lambrechts et al., 2011
+b_aegypti_lambrechts_2011 <- function(T) {
+  
+  b_prob <- rep(NA_real_, length(T))
+  
+  idx1 <- T >= 12.4 & T <= 26.1
+  idx2 <- T > 26.1 & T <= 32.5
+  
+  b_prob[idx1] <- -0.9037 + 0.0729 * T[idx1]
+  b_prob[idx2] <- 1
+  
+  return(b_prob)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+b_aegypti_mordecai_2017 <- function(T) {
+  
+  b_prob <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 17.05 & T < 35.83
+  
+  b_prob[idx1] <- 8.49E-4 * T[idx1] * (T[idx1] - 17.05) * sqrt(35.83 - T[idx1])
+  
+  return(b_prob)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+b_albopictus_mordecai_2017 <- function(T) {
+  
+  b_prob <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 15.84 & T < 36.40
+  
+  b_prob[idx1] <- 7.35E-4 * T[idx1] * (T[idx1] - 15.84) * sqrt(36.40 - T[idx1])
+  
+  return(b_prob)
+}
+
+
+####### Make data frame ##########
+
+vector_to_human_data <- rbind(
+  data.frame(
+    temp = temp,
+    b_prob = b_aegypti_lambrechts_2011(temp),
+    function_name = "Ae. aegypti - Lambrechts 2011"
+  ),
+  
+  data.frame(
+    temp = temp,
+    b_prob = b_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    b_prob = b_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  )
+)
+
+
+####### Plot transmission probability vector to human ##########
+
+p_b <- ggplot(vector_to_human_data, aes(x = temp, y = b_prob, color = function_name)) +
+  geom_line(linewidth = 1) +
+  coord_cartesian(ylim = c(0, 1)) +
+  labs(
+    x = "Temperature (C)",
+    y = "Transmission probability vector to human, b(T)",
+    color = "Function",
+    title = "Transmission probability vector to human thermal functions"
+  ) +
+  theme_bw()
+
+print(p_b)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "transmission_vector_to_human.jpg",
+  plot = p_b,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+\newpage
+
+
+# Transmission Probability (Human -> Vector)
+
+c is the proportion of bites on infected humans that infect previously uninfected mosquitoes. (i.e., b*c = vector competence).
+
+```{r transmission_human_to_vector, message=FALSE, warning=FALSE, fig.cap="Transmission probability human to vector thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Transmission Probability Human -> Vector ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Lambrechts et al., 2011
+c_aegypti_lambrechts_2011 <- function(T) {
+  
+  c <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 12.286 & T < 32.461
+  
+  c[idx1] <- 0.001044 * T[idx1] * (T[idx1] - 12.286) * sqrt(32.461 - T[idx1])
+  
+  return(c)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+c_aegypti_mordecai_2017 <- function(T) {
+  
+  c <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 12.22 & T < 37.46
+  
+  c[idx1] <- 4.91E-4 * T[idx1] * (T[idx1] - 12.22) * sqrt(37.46 - T[idx1])
+  
+  return(c)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+c_albopictus_mordecai_2017 <- function(T) {
+  
+  c <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 3.62 & T < 36.82
+  
+  c[idx1] <- 4.39E-4 * T[idx1] * (T[idx1] - 3.62) * sqrt(36.82 - T[idx1])
+  
+  return(c)
+}
+
+
+####### Make data frame ##########
+
+human_to_vector_data <- rbind(
+  data.frame(
+    temp = temp,
+    c = c_aegypti_lambrechts_2011(temp),
+    function_name = "Ae. aegypti - Lambrechts 2011"
+  ),
+  
+  data.frame(
+    temp = temp,
+    c = c_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    c = c_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  )
+)
+
+
+####### Plot transmission probability human to vector ##########
+
+p_c <- ggplot(human_to_vector_data, aes(x = temp, y = c, color = function_name)) +
+  geom_line(linewidth = 1) +
+  coord_cartesian(ylim = c(0, 1.1)) +
+  labs(
+    x = "Temperature (C)",
+    y = "Transmission probability human to vector, c(T)",
+    color = "Function",
+    title = "Transmission probability human to vector thermal functions"
+  ) +
+  theme_bw()
+
+print(p_c)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "transmission_human_to_vector.jpg",
+  plot = p_c,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+\newpage
+
+# Adult Mosquito Mortality Rate
+
+$\mu$ is the adult mosquito mortality rate.
+
+For Mordecai et al. 2017, the table gives adult mosquito lifespan, $lf(T)$, not mortality rate directly. Therefore, mortality is calculated as: $\mu(T)=\frac{1}{lf(T)}$
+
+* For Ng et al. 2017, the original source was checked. The $T^5$ coefficient is $-2.72000e^{-8}$, not $-2.72e^{-2}$.
+
+* Mordecai Ae. aegypti functions is $(T-37.73)$ not $(37.73-T)$
+
+* Mordecai albopictus functions is $(T-31.51)$ not $(31.51-T)$
+```{r mortality_rate, message=FALSE, warning=FALSE, fig.cap="Adult mosquito mortality rate thermal functions", echo=F, fig.pos="H", out.extra = ""}
+
+####### Adult Mosquito Mortality Rate ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Caminade et al., 2017
+mu_aegypti_caminade_2017 <- function(T) {
+  
+  mu <- rep(NA_real_, length(T))
+  
+  idx1 <- T < 22
+  idx2 <- T >= 22
+  
+  mu[idx1] <- 1 / (1.22 + exp(-3.05 + 0.72 * T[idx1])) + 0.196
+  mu[idx2] <- 1 / (1.14 + exp(51.4 - 1.3 * T[idx2])) + 0.192
+  
+  return(mu)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Focks et al., 1995; Kakarla et al., 2019; Mclean et al., 1974; Yang et al., 2009
+mu_aegypti_focks_1995 <- function(T) {
+  
+  mu <- 0.8692 -
+    0.1590 * T +
+    0.01116 * T^2 -
+    0.0003408 * T^3 +
+    0.000003809 * T^4
+  
+  return(mu)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Poletti et al., 2011
+mu_albopictus_poletti_2011 <- function(T) {
+  
+  mu <- 0.031 + 95820 * exp(T - 50.4)
+  
+  return(mu)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Ruiz-Moreno et al., 2012
+mu_albopictus_ruiz_moreno_2012 <- function(T) {
+  
+  mu <- rep(NA_real_, length(T))
+  
+  idx1 <- T < -5
+  idx2 <- T >= -5 & T < 15
+  idx3 <- T >= 15 & T < 38.5
+  idx4 <- T >= 38.5
+  
+  mu[idx1] <- 0
+  mu[idx2] <- 1 / (5.6 + 1.12 * T[idx2])
+  mu[idx3] <- 1 / (40.27 - 1.38 * T[idx3] + 0.01 * T[idx3]^2)
+  mu[idx4] <- 0
+  
+  return(mu)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Brady et al., 2013; Caminade et al., 2017; Zardini et al., 2024
+mu_albopictus_brady_2013 <- function(T) {
+  
+  mu <- rep(NA_real_, length(T))
+  
+  idx1 <- T < 15
+  idx2 <- T >= 15 & T < 26.3
+  idx3 <- T >= 26.3
+  
+  mu[idx1] <- 1 / (1.1 + exp(-4.04 + 0.576 * T[idx1])) + 0.12
+  mu[idx2] <- 0.000339 * T[idx2]^2 - 0.0189 * T[idx2] + 0.336
+  mu[idx3] <- 1 / (1.065 + exp(32.2 - 0.92 * T[idx3])) + 0.0747
+  
+  return(mu)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Ng et al., 2017
+# Checked Ng et al. (2017): the T^5 coefficient is -2.72000e-08, not -2.72e-02.
+mu_albopictus_ng_2017 <- function(T) {
+  
+  mu <- 1.33048 -
+    2.32772e-1 * T +
+    1.68529e-2 * T^2 -
+    5.61719e-4 * T^3 +
+    7.91643e-6 * T^4 -
+    2.72e-8 * T^5     # Original Table but shoud modify to 2.72e-8
+  
+  return(mu)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+# Table gives lifespan; mortality is calculated as mu(T) = 1 / lf(T).
+mu_aegypti_mordecai_2017 <- function(T) {
+  
+  mu <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 9.16 & T < 37.73
+  
+  lf <- -1.48e-1 * (T[idx1] - 9.16) * (T[idx1] - 37.73)
+  mu[idx1] <- 1 / lf
+  
+  return(mu)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+# Table gives lifespan; mortality is calculated as mu(T) = 1 / lf(T).
+mu_albopictus_mordecai_2017 <- function(T) {
+  
+  mu <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 13.41 & T < 31.51
+  
+  lf <- -1.43 * (T[idx1] - 13.41) * (T[idx1] - 31.51 )
+  mu[idx1] <- 1 / lf
+  
+  return(mu)
+}
+
+
+####### Make data frame ##########
+
+mortality_data <- rbind(
+  data.frame(
+    temp = temp,
+    mu = mu_aegypti_caminade_2017(temp),
+    function_name = "Ae. aegypti - Caminade 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_aegypti_focks_1995(temp),
+    function_name = "Ae. aegypti - Focks/Kakarla/Mclean/Yang"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_albopictus_poletti_2011(temp),
+    function_name = "Ae. albopictus - Poletti 2011"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_albopictus_ruiz_moreno_2012(temp),
+    function_name = "Ae. albopictus - Ruiz-Moreno 2012"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_albopictus_brady_2013(temp),
+    function_name = "Ae. albopictus - Brady/Caminade/Zardini"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_albopictus_ng_2017(temp),
+    function_name = "Ae. albopictus - Ng 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017 from lifespan"
+  ),
+  
+  data.frame(
+    temp = temp,
+    mu = mu_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017 from lifespan"
+  )
+)
+
+
+####### Check possible problems ##########
+
+problem_mu <- mortality_data[
+  is.na(mortality_data$mu) |
+    !is.finite(mortality_data$mu) |
+    mortality_data$mu < 0 |
+    mortality_data$mu > 2,
+]
+
+problem_summary <- aggregate(
+  temp ~ function_name,
+  data = problem_mu,
+  FUN = length
+)
+
+names(problem_summary)[2] <- "number_of_problem_values"
+
+
+####### Plot mortality rate ##########
+
+p_mu <- ggplot(mortality_data, aes(x = temp, y = mu, color = function_name)) +
+  geom_line(linewidth = 1) +
+  coord_cartesian(ylim = c(0, 2)) +
+  labs(
+    x = "Temperature (C)",
+    y = "Adult mosquito mortality rate, mu(T)",
+    color = "Function",
+    title = "Adult mosquito mortality rate thermal functions"
+  ) +
+  theme_bw()
+
+print(p_mu)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "adult_mosquito_mortality_rate.jpg",
+  plot = p_mu,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+\newpage
+
+
+# Parasite Development Rate
+
+PDR is the parasite development rate (i.e., the inverse of the extrinsic incubation period, the time required between a mosquito biting an infected host and becoming infectious)
+```{r parasite_development_rate, message=FALSE, warning=FALSE, fig.cap="Parasite development rate thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Extrinsic Incubation Rate / Parasite Development Rate ##########
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+PDR_albopictus_mordecai_2017 <- function(T) {
+  
+  PDR <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 10.39 & T < 43.05
+  
+  PDR[idx1] <- 1.09E-4 * T[idx1] * (T[idx1] - 10.39) * sqrt(43.05 - T[idx1])
+  
+  return(PDR)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+PDR_aegypti_mordecai_2017 <- function(T) {
+  
+  PDR <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 10.68 & T < 45.90
+  
+  PDR[idx1] <- 6.65E-5 * T[idx1] * (T[idx1] - 10.68) * sqrt(45.90 - T[idx1])
+  
+  return(PDR)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Focks et al., 1995
+PDR_aegypti_focks_1995 <- function(T) {
+  
+  PDR <- 1 / (4 + exp(5.15 - 0.123 * T))
+  
+  return(PDR)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Chan & Johansson, 2012
+PDR_albopictus_chan_johansson_2012 <- function(T) {
+  
+  PDR <- 1 / exp(log(6) * exp(-0.08 * (T - 28)))
+  
+  return(PDR)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Chan & Johansson, 2012
+PDR_albopictus_chan_johansson_2012_alt <- function(T) {
+  
+  PDR <- 1 / (3.0 * exp(-0.21 * (T - 28.0)))
+  
+  return(PDR)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Ruiz-Moreno et al., 2012
+PDR_albopictus_ruiz_moreno_2012 <- function(T) {
+  
+  EIP <- rep(NA_real_, length(T))
+  
+  idx1 <- T < 10
+  idx2 <- T >= 10 & T <= 32
+  idx3 <- T > 32
+  
+  EIP[idx1] <- 4
+  EIP[idx2] <- 113 / 22 - (2.4 / 22) * T[idx2]
+  EIP[idx3] <- 1.5
+  
+  PDR <- 1 / EIP
+  
+  return(PDR)
+}
+
+
+####### Make data frame ##########
+
+PDR_data <- rbind(
+  data.frame(
+    temp = temp,
+    PDR = PDR_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    PDR = PDR_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    PDR = PDR_aegypti_focks_1995(temp),
+    function_name = "Ae. aegypti - Focks 1995"
+  ),
+  
+  data.frame(
+    temp = temp,
+    PDR = PDR_albopictus_chan_johansson_2012(temp),
+    function_name = "Ae. albopictus - Chan 2012"
+  ),
+  
+  data.frame(
+    temp = temp,
+    PDR = PDR_albopictus_chan_johansson_2012_alt(temp),
+    function_name = "Ae. albopictus - Chan 2012 alt"
+  ),
+  
+  data.frame(
+    temp = temp,
+    PDR = PDR_albopictus_ruiz_moreno_2012(temp),
+    function_name = "Ae. albopictus - Ruiz 2012"
+  )
+)
+
+
+####### Plot parasite development rate ##########
+
+p_PDR <- ggplot(PDR_data, aes(x = temp, y = PDR, color = function_name)) +
+  geom_line(linewidth = 1) +
+  coord_cartesian(ylim = c(0, 0.3)) +
+  labs(
+    x = "Temperature (C)",
+    y = "Parasite development rate, PDR(T)",
+    color = "Function",
+    title = "Parasite development rate thermal functions"
+  ) +
+  theme_bw()
+
+print(p_PDR)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "parasite_development_rate.jpg",
+  plot = p_PDR,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+\newpage
+
+# Eggs per Female per Day (Fecundity)
+
+EFD (Ae. aegypti) is the number of eggs produced per female mosquito per day and TFD (Ae. albopictus) is number of eggs laid per female per
+gonotrophic cycle (number/female)
+
+
+
+```{r fecundity, message=FALSE, warning=FALSE, fig.cap="Fecundity thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Fecundity ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Yang et al., 2009
+EFD_aegypti_yang_2009 <- function(T) {
+  
+  EFD <- -341.8585 +
+    108.7373 * T -
+    12.3447 * T^2 +
+    0.6367451 * T^3 -
+    0.0149469 * T^4 +
+    0.0001294166 * T^5
+  
+  return(EFD)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+EFD_albopictus_mordecai_2017 <- function(T) {
+  
+  EFD <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 8.02 & T < 35.65
+  
+  EFD[idx1] <- 4.88E-02 * T[idx1] * (T[idx1] - 8.02) * sqrt(35.65 - T[idx1])
+  
+  return(EFD)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+EFD_aegypti_mordecai_2017 <- function(T) {
+  
+  EFD <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 14.58 & T < 34.61
+  
+  EFD[idx1] <- 8.56E-03 * T[idx1] * (T[idx1] - 14.58) * sqrt(34.61 - T[idx1])
+  
+  return(EFD)
+}
+
+
+####### Make data frame ##########
+
+fecundity_data <- rbind(
+  data.frame(
+    temp = temp,
+    EFD = EFD_aegypti_yang_2009(temp),
+    function_name = "Ae. aegypti - Yang 2009"
+  ),
+  
+  data.frame(
+    temp = temp,
+    EFD = EFD_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    EFD = EFD_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  )
+)
+
+
+####### Plot fecundity ##########
+
+p_EFD <- ggplot(fecundity_data, aes(x = temp, y = EFD, color = function_name)) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = "Temperature (C)",
+    y = "Fecundity, EFD(T)",
+    color = "Function",
+    title = "Fecundity thermal functions"
+  ) +
+  theme_bw()
+
+print(p_EFD)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "fecundity.jpg",
+  plot = p_EFD,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+
+
+\newpage 
+
+# Egg-Adult Survival Probability
+
+$p_{EA}$ is the mosquito egg-to-adult survival probability
+
+* The *Ae. albopictus* Mordecai function is $(T - 39.33)$ not $(39.33-T)$.
+
+```{r egg_adult_survival_probability, message=FALSE, warning=FALSE, fig.cap="Egg-adult survival probability thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Egg-Adult Survival Probability ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+pEA_aegypti_mordecai_2017 <- function(T) {
+  
+  pEA <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 13.56 & T < 38.29
+  
+  pEA[idx1] <- 5.99E-03 * (T[idx1] - 13.56) * (38.29 - T[idx1])
+  
+  return(pEA)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+pEA_albopictus_mordecai_2017 <- function(T) {
+  
+  pEA <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 9.04 & T < 39.33
+  
+  pEA[idx1] <- -3.61E-03 * (T[idx1] - 9.04) * (T[idx1] - 39.33)
+  
+  return(pEA)
+}
+
+
+####### Make data frame ##########
+
+pEA_data <- rbind(
+  data.frame(
+    temp = temp,
+    pEA = pEA_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    pEA = pEA_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  )
+)
+
+
+####### Plot egg-adult survival probability ##########
+
+p_pEA <- ggplot(pEA_data, aes(x = temp, y = pEA, color = function_name)) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = "Temperature (C)",
+    y = "Egg-adult survival probability, pEA(T)",
+    color = "Function",
+    title = "Egg-adult survival probability thermal functions"
+  ) +
+  theme_bw()
+
+print(p_pEA)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "egg_adult_survival_probability.jpg",
+  plot = p_pEA,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+\newpage
+
+# Mosquito Immature Development Rate (Aquatic Maturation)
+
+MDR is the mosquito immature development rate (i.e., the inverse of the egg-to-adult development time)
+
+```{r aquatic_maturation, message=FALSE, warning=FALSE, fig.cap="Aquatic maturation thermal functions", echo=F, fig.pos="H", out.extra = ""}
+####### Aquatic Maturation ##########
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Zhu et al., 2019
+phi_v_aegypti_zhu_2019 <- function(T) {
+  
+  phi_v <- (
+    0.131 -
+      0.05723 * T +
+      0.01164 * T^2 -
+      0.001341 * T^3 +
+      8.723E-5 * T^4 -
+      3.017E-6 * T^5 +
+      5.153E-8 * T^6 -
+      3.42E-10 * T^7
+  ) / 7
+  
+  return(phi_v)
+}
+
+
+# Species: Ae. aegypti
+# Cited as Original Source: Mordecai et al., 2017
+MDR_aegypti_mordecai_2017 <- function(T) {
+  
+  MDR <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 11.36 & T < 39.17
+  
+  MDR[idx1] <- 7.86E-5 * T[idx1] * (T[idx1] - 11.36) * sqrt(39.17 - T[idx1])
+  
+  return(MDR)
+}
+
+
+# Species: Ae. albopictus
+# Cited as Original Source: Mordecai et al., 2017
+MDR_albopictus_mordecai_2017 <- function(T) {
+  
+  MDR <- rep(NA_real_, length(T))
+  
+  idx1 <- T > 8.60 & T < 39.66
+  
+  MDR[idx1] <- 6.38E-5 * T[idx1] * (T[idx1] - 8.60) * sqrt(39.66 - T[idx1])
+  
+  return(MDR)
+}
+
+
+####### Make data frame ##########
+
+aquatic_maturation_data <- rbind(
+  data.frame(
+    temp = temp,
+    MDR = phi_v_aegypti_zhu_2019(temp),
+    function_name = "Ae. aegypti - Zhu 2019"
+  ),
+  
+  data.frame(
+    temp = temp,
+    MDR = MDR_aegypti_mordecai_2017(temp),
+    function_name = "Ae. aegypti - Mordecai 2017"
+  ),
+  
+  data.frame(
+    temp = temp,
+    MDR = MDR_albopictus_mordecai_2017(temp),
+    function_name = "Ae. albopictus - Mordecai 2017"
+  )
+)
+
+
+####### Plot aquatic maturation ##########
+
+p_MDR <- ggplot(aquatic_maturation_data, aes(x = temp, y = MDR, color = function_name)) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = "Temperature (C)",
+    y = "Aquatic maturation, MDR(T)",
+    color = "Function",
+    title = "Aquatic maturation thermal functions"
+  ) +
+  theme_bw()
+
+print(p_MDR)
+
+
+####### Save figure ##########
+
+ggsave(
+  filename = "aquatic_maturation.jpg",
+  plot = p_MDR,
+  width = 8,
+  height = 5,
+  dpi = 300,
+  device = "jpeg",
+  bg = "white"
+)
+```
+
+
+
+
+
