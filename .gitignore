@@ -12,11 +12,5 @@ Thumbs.db
 *.toc
 *.synctex.gz
 
-# Office temporary lock files
-~$*
 
-# Extracted/generated tables
-output/thermal_table_extracted_*.csv
 
-# Old document folder kept only if a file is open/locked locally
-Documents/

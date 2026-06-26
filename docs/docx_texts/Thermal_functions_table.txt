@@ -1,0 +1,393 @@
+Species
+Equation
+CHIKV Model(s)
+Cited as Original Source
+Confirmed Original Source
+Adult Mosquito Mortality Rate
+Ae. aegypti
+(Zardini et al., 2024)
+(Caminade et al., 2017)
+Ae. aegypti
+(Boer et al., 2025; Carreto et al., 2022; de Roo et al., 2025; Gondim et al., 2026; Kakarla et al., 2019; Liu et al., 2020b; Lusekelo et al., 2023)
+(Focks et al., 1995; Kakarla et al., 2019; Mclean et al., 1974; Yang et al., 2009)
+Ae. albopictus
+(Guzzetta et al., 2016; Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Ae. albopictus
+(Ruiz-Moreno, 2016; Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+Ae. albopictus
+(Furuya, 2017; Nadim et al., 2025; Zardini et al., 2024)
+(Brady et al., 2013; Caminade et al., 2017; Zardini et al., 2024)
+Ae. albopictus
+(Ng et al., 2017; Tjaden et al., 2021)
+(Ng et al., 2017)
+(Ng et al., 2017)
+Adult Mosquito 
+Lifespan
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Poterek et al., 2022; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Ae. albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Adult Mosquito Survival
+Ae. albopictus
+(Ng et al., 2017; Tjaden et al., 2021)
+(Brady et al., 2013)
+Unknown
+(Johansson et al., 2014)
+(Brady et al., 2013)
+Aquatic Maturation
+Ae. aegypti
+(Lusekelo et al., 2023)
+(Zhu et al., 2019)
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Ae. albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Aquatic Mortality
+Ae. aegypti
+(Lusekelo et al., 2023)
+(Zhu et al., 2019)
+Biting Rate
+Ae. aegypti
+(Gondim et al., 2026; Kakarla et al., 2019; Liu et al., 2020a, 2020b; Lusekelo et al., 2023; Zardini et al., 2024)
+(Caminade et al., 2017; Focks et al., 1995; Kakarla et al., 2019; Liu-Helmersson et al., 2014; Mclean et al., 1974; Scott et al., 2000)
+Ae aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Poterek et al., 2022; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Ae. albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Ae. albopictus
+(Furuya, 2017; Nadim et al., 2025; Zardini et al., 2024)
+(Caminade et al., 2017; Liu-Helmersson et al., 2014; Scott et al., 
+2000; Zardini et al., 2024)
+Egg-Adult Survival Probability
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Ae albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Egg Hatching
+Ae. aegypti
+(Gondim et al., 2026)
+(Valdez et al., 2018)
+Ae. aegypti
+(Liu et al., 2020a, 2020b)
+(Valdez et al., 2018)
+Ae. albopictus
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Egg Maturation
+Ae. aegypti
+(Liu et al., 2020b)
+(Valdez et al., 2018; Wang & Zou, 2018)
+Ae. albopictus
+(Ruiz-Moreno, 2016; Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+Egg 
+M
+ortality
+Ae. albopictus
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Ae. albopictus
+(Ruiz-Moreno, 2016; Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+Extrinsic Incubation Period (EIP)
+Ae. aegypti
+(Boer et al., 2025; de Roo et al., 2025; Gondim et al., 2026; Kakarla et al., 2019; Liu et al., 2020a, 2020b; Lusekelo et al., 2023)
+(Focks et al., 1995; Kakarla et al., 2019; Liu et al., 2020b; Mclean et al., 1974; Valdez et al., 2018)
+Ae. albopictus
+(Johansson et al., 2014; Ng et al., 2017; Tjaden et al., 2021)
+(Chan & Johansson, 2012; Johansson et al., 2014)
+Ae. albopictus
+(Furuya, 2017; Riou et al., 2017)
+(Chan & Johansson, 2012; Riou et al., 2017)
+Ae. albopictus
+(Ruiz-Moreno, 2016; Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+Extrinsic Incubation Rate / Parasite Development Rate
+Ae. albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Poterek et al., 2022; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Fecundity
+Ae. aegypti
+(Boer et al., 2025; de Roo et al., 2025)
+(Yang et al., 2009)
+Ae. albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Gonotrophic Cycle Duration
+Ae. aegypti
+(Riou et al., 2017)
+(Carrington et al., 2013)
+Ae. albopictus
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024; Zardini et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Intrinsic Oviposition Rate
+Ae. aegypti
+(Lusekelo et al., 2023)
+(Zhu et al., 2019)
+Larvae Mortality
+Ae. aegypti
+(Gondim et al., 2026; Liu et al., 2020b)
+(Valdez et al., 2018; Wang & Zou, 2018)
+Ae. albopictus
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Ae. albopictus
+(Ruiz-Moreno, 2016; Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+Larvae Maturation Rate
+Ae. aegypti
+(Gondim et al., 2026)
+(Liu et al., 2020b)
+Ae. aegypti
+(Liu et al., 2020b)
+(Valdez et al., 2018; Wang & Zou, 2018)
+Ae. albopictus
+(Guzzetta et al., 2016; Nadim et al., 2025; 
+Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Ae. albopictus
+(Ruiz-Moreno, 2016; Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+(Ruiz-Moreno et al., 2012)
+Pupae Maturation Rate
+Ae. albopictus
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Pupae Mortality Rate
+Ae. albopictus
+(Guzzetta et al., 2016; Poletti et al., 2011; Sloof et al., 2024)
+(Poletti et al., 2011)
+(Poletti et al., 2011)
+Transmission Probability (Human -> Vector)
+Ae. aegypti
+(Kakarla et al., 2019; Lusekelo et al., 2023)
+(Lambrechts et al., 2011)
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Poterek et al., 2022; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Ae albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Transmission Probability (Vector -> Human)
+Ae. aegypti
+(Carreto et al., 2022; Kakarla et al., 2019; Lusekelo et al., 2023)
+(Lambrechts et al., 2011)
+Ae. aegypti
+(Huber et al., 2018; Mordecai et al., 2017; Poterek et al., 2022; Ryan et al., 2019)
+(Mordecai et al., 2017)
+Ae. albopictus
+(Mordecai et al., 2017)
+(Mordecai et al., 2017)
+Boer, M., Vondeling, G. T., Plennevaux, E., & de Roo, A. M. (2025). Modeling outbreak prediction and the impact of emergency vaccination on the 2024-2025 Chikungunya outbreak in La Réunion. 
+Vaccines
+, 
+13
+(12), 1181. https://doi.org/10.3390/vaccines13121181
+Brady, O. J., Johansson, M. A., Guerra, C. A., Bhatt, S., Golding, N., Pigott, D. M., Delatte, H., Grech, M. G., Leisnham, P. T., Maciel-de-Freitas, R., Styer, L. M., Smith, D. L., Scott, T. W., Gething, P. W., & Hay, S. I. (2013). Modelling adult Aedes aegypti and Aedes albopictus survival at different temperatures in laboratory and field settings. 
+Parasites & Vectors
+, 
+6
+(1), 351. https://doi.org/10.1186/1756-3305-6-351
+Caminade, C., Turner, J., Metelmann, S., Hesson, J. C., Blagrove, M. S. C., Solomon, T., Morse, A. P., & Baylis, M. (2017). Global risk model for vector-borne transmission of Zika virus reveals the role of El Niño 2015. 
+Proceedings of the National Academy of Sciences of the United States of America
+, 
+114
+(1), 119–124. https://doi.org/10.1073/pnas.1614303114
+Carreto, C., Gutiérrez-Romero, R., & Rodríguez, T. (2022). Climate-driven mosquito-borne viral suitability index: measuring risk transmission of dengue, chikungunya and Zika in Mexico. 
+International Journal of Health Geographics
+, 
+21
+(1), 15. https://doi.org/10.1186/s12942-022-00317-0
+Carrington, L. B., Armijos, M. V., Lambrechts, L., Barker, C. M., & Scott, T. W. (2013). Effects of fluctuating daily temperatures at critical thermal extremes on Aedesaegypti life-history traits. 
+PLOS ONE
+, 
+8
+(3).
+Chan, M., & Johansson, M. A. (2012). The incubation periods of Dengue viruses. 
+PloS One
+, 
+7
+(11), e50972. https://doi.org/10.1371/journal.pone.0050972
+de Roo, A. M., Boer, M., Vondeling, G. T., Louwsma, T., Sloof, A. C., Postma, M. J., Mores, C. N., Christofferson, R. C., van der Schans, J., & de Jong, L. A. (2025). Evaluating chikungunya outbreak size and emergency vaccination strategies in Miami: an exploratory modeling study. 
+BMC Public Health
+, 
+25
+(1), 3781. https://doi.org/10.1186/s12889-025-24923-2
+Focks, D. A., Daniels, E., Haile, D. G., & Keesling, J. E. (1995). A simulation model of the epidemiology of urban dengue fever: literature analysis, model development, preliminary validation, and samples of simulation results. 
+The American Journal of Tropical Medicine and Hygiene
+, 
+53
+(5), 489–506. https://doi.org/10.4269/ajtmh.1995.53.489
+Furuya, H. (2017). Estimating vector-borne viral infections in the urban setting of the 2020 Tokyo Olympics, Japan, using mathematical modeling. 
+The Tokai Journal of Experimental and Clinical Medicine
+, 
+42
+(4), 160–164. https://www.ncbi.nlm.nih.gov/pubmed/29228413
+Gondim, A., Schultz, L., Huo, X., & Ruan, S. (2026). Quantifying the risk of long-term chikungunya persistence in Miami-Dade county. 
+Mathematical Biosciences
+, 
+392
+(109597), 109597. https://doi.org/10.1016/j.mbs.2025.109597
+Guzzetta, G., Montarsi, F., Baldacchino, F. A., Metz, M., Capelli, G., Rizzoli, A., Pugliese, A., Rosà, R., Poletti, P., & Merler, S. (2016). Potential risk of dengue and Chikungunya outbreaks in northern Italy based on a population model of Aedes albopictus (Diptera: Culicidae). 
+PLoS Neglected Tropical Diseases
+, 
+10
+(6), e0004762. https://doi.org/10.1371/journal.pntd.0004762
+Huber, J. H., Childs, M. L., Caldwell, J. M., & Mordecai, E. A. (2018). Seasonal temperature variation influences climate suitability for dengue, chikungunya, and Zika transmission. 
+PLoS Neglected Tropical Diseases
+, 
+12
+(5), e0006451. https://doi.org/10.1371/journal.pntd.0006451
+Johansson, M. A., Powers, A. M., Pesik, N., Cohen, N. J., & Staples, J. E. (2014). Nowcasting the spread of chikungunya virus in the Americas. 
+PloS One
+, 
+9
+(8), e104915. https://doi.org/10.1371/journal.pone.0104915
+Kakarla, S. G., Mopuri, R., Mutheneni, S. R., Bhimala, K. R., Kumaraswamy, S., Kadiri, M. R., Gouda, K. C., & Upadhyayula, S. M. (2019). Temperature dependent transmission potential model for chikungunya in India. 
+The Science of the Total Environment
+, 
+647
+, 66–74. https://doi.org/10.1016/j.scitotenv.2018.07.461
+Lambrechts, L., Paaijmans, K. P., Fansiri, T., Carrington, L. B., Kramer, L. D., Thomas, M. B., & Scott, T. W. (2011). Impact of daily temperature fluctuations on dengue virus transmission by Aedes aegypti. 
+Proceedings of the National Academy of Sciences of the United States of America
+, 
+108
+(18), 7460–7465. https://doi.org/10.1073/pnas.1101377108
+Liu, X., Wang, Y., & Zhao, X.-Q. (2020a). Dynamics of a climate-based periodic Chikungunya model with incubation period. 
+Applied Mathematical Modelling
+, 
+80
+, 151–168. https://doi.org/10.1016/j.apm.2019.11.038
+Liu, X., Wang, Y., & Zhao, X.-Q. (2020b). Dynamics of a periodic Chikungunya model with temperature and rainfall effects. 
+Communications in Nonlinear Science & Numerical Simulation
+, 
+90
+(105409), 105409. https://doi.org/10.1016/j.cnsns.2020.105409
+Liu-Helmersson, J., Stenlund, H., Wilder-Smith, A., & Rocklöv, J. (2014). Vectorial capacity of Aedes aegypti: effects of temperature and implications for global dengue epidemic potential. 
+PloS One
+, 
+9
+(3), e89783. https://doi.org/10.1371/journal.pone.0089783
+Lusekelo, E., Helikumi, M., Kuznetsov, D., & Mushayabasa, S. (2023). Dynamic modelling and optimal control analysis of a fractional order chikungunya disease model with temperature effects. 
+Results in Control and Optimization
+, 
+10
+(100206), 100206. https://doi.org/10.1016/j.rico.2023.100206
+Mclean, D., Clarke, A., Coleman, J., Montalbetti, C., & Skidmore, A. (1974). ) Vector capability of Aedes aegypti mosquitoes for California encephalitis and dengue viruses at various temperatures. 
+Can J Microbiol
+, 
+20
+, 255–262.
+Mordecai, E. A., Cohen, J. M., Evans, M. V., Gudapati, P., Johnson, L. R., Lippi, C. A., Miazgowicz, K., Murdock, C. C., Rohr, J. R., Ryan, S. J., Savage, V., Shocket, M. S., Stewart Ibarra, A., Thomas, M. B., & Weikel, D. P. (2017). Detecting the impact of temperature on transmission of Zika, dengue, and chikungunya using mechanistic models. 
+PLoS Neglected Tropical Diseases
+, 
+11
+(4), e0005568. https://doi.org/10.1371/journal.pntd.0005568
+Nadim, S. S., Menegale, F., Manica, M., Kaye, A. R., Balatsos, G., Bisia, M., Pichler, V., Poletti, P., Merler, S., Della Torre, A., Thompson, R. N., Michaelakis, A., & Guzzetta, G. (2025). Assessing risks of dengue, chikungunya and Zika transmission associated to Aedes albopictus in Chania, Greece, 2017-2018. 
+PLoS Neglected Tropical Diseases
+, 
+19
+(12), e0013785. https://doi.org/10.1371/journal.pntd.0013785
+Ng, V., Fazil, A., Gachon, P., Deuymes, G., Radojević, M., Mascarenhas, M., Garasia, S., Johansson, M. A., & Ogden, N. H. (2017). Assessment of the probability of autochthonous transmission of Chikungunya virus in Canada under recent and projected climate change. 
+Environmental Health Perspectives
+, 
+125
+(6). https://doi.org/10.1289/ehp669
+Poletti, P., Messeri, G., Ajelli, M., Vallorani, R., Rizzo, C., & Merler, S. (2011). Transmission potential of chikungunya virus and control measures: the case of Italy. 
+PloS One
+, 
+6
+(5), e18860. https://doi.org/10.1371/journal.pone.0018860
+Poterek, M. L., Vogels, C. B. F., Grubaugh, N. D., Ebel, G. D., Alex Perkins, T., & Cavany, S. M. (2022). Interactions between seasonal temperature variation and temporal synchrony drive increased arbovirus co-infection incidence. 
+Royal Society Open Science
+, 
+9
+(10), 220829. https://doi.org/10.1098/rsos.220829
+Riou, J., Poletto, C., & Boëlle, P.-Y. (2017). A comparative analysis of Chikungunya and Zika transmission. 
+Epidemics
+, 
+19
+, 43–52. https://doi.org/10.1016/j.epidem.2017.01.001
+Ruiz-Moreno, D. (2016). Assessing Chikungunya risk in a metropolitan area of Argentina through satellite images and mathematical models. 
+BMC Infectious Diseases
+, 
+16
+(1), 49. https://doi.org/10.1186/s12879-016-1348-y
+Ruiz-Moreno, D., Vargas, I. S., Olson, K. E., & Harrington, L. C. (2012). Modeling dynamic introduction of Chikungunya virus in the United States. 
+PLoS Neglected Tropical Diseases
+, 
+6
+(11), e1918. https://doi.org/10.1371/journal.pntd.0001918
+Ryan, S. J., Carlson, C. J., Mordecai, E. A., & Johnson, L. R. (2019). Global expansion and redistribution of Aedes-borne virus transmission risk with climate change. 
+PLoS Neglected Tropical Diseases
+, 
+13
+(3), e0007213. https://doi.org/10.1371/journal.pntd.0007213
+Scott, T. W., Amerasinghe, P. H., Morrison, A. C., Lorenz, L. H., Clark, G. G., Strickman, D., Kittayapong, P., & Edman, J. D. (2000). Longitudinal studies of Aedes aegypti (Diptera: Culicidae) in Thailand and Puerto Rico: blood feeding frequency. 
+Journal of Medical Entomology
+, 
+37
+(1), 89–101. https://doi.org/10.1603/0022-2585-37.1.89
+Sloof, A. C., Boer, M., Vondeling, G. T., de Roo, A. M., Jaramillo, J. C., & Postma, M. J. (2024). Strategic vaccination responses to Chikungunya outbreaks in Rome: Insights from a dynamic transmission model. 
+PLoS Neglected Tropical Diseases
+, 
+18
+(12), e0012713. https://doi.org/10.1371/journal.pntd.0012713
+Tjaden, N. B., Cheng, Y., Beierkuhnlein, C., & Thomas, S. M. (2021). Chikungunya beyond the tropics: Where and when do we expect disease transmission in Europe? 
+Viruses
+, 
+13
+(6), 1024. https://doi.org/10.3390/v13061024
+Valdez, L. D., Sibona, G. J., & Condat, C. A. (2018). Impact of rainfall on Aedes aegypti populations. 
+Ecological Modelling
+, 
+385
+, 96–105. https://doi.org/10.1016/j.ecolmodel.2018.07.003
+Wang, X., & Zou, X. (2018). Threshold dynamics of a temperature-dependent stage-structured mosquito population model with nested delays. 
+Bulletin of Mathematical Biology
+, 
+80
+(7), 1962–1987. https://doi.org/10.1007/s11538-018-0447-x
+Yang, H. M., Macoris, M. L. G., Galvani, K. C., Andrighetti, M. T. M., & Wanderley, D. M. V. (2009). Assessing the effects of temperature on the population of Aedes aegypti, the vector of dengue. 
+Epidemiology and Infection
+, 
+137
+(8), 1188–1202. https://doi.org/10.1017/S0950268809002040
+Zardini, A., Menegale, F., Gobbi, A., Manica, M., Guzzetta, G., d’Andrea, V., Marziano, V., Trentini, F., Montarsi, F., Caputo, B., Solimini, A., Marques-Toledo, C., Wilke, A. B. B., Rosà, R., Marini, G., Arnoldi, D., Pastore Y Piontti, A., Pugliese, A., Capelli, G., … Poletti, P. (2024). Estimating the potential risk of transmission of arboviruses in the Americas and Europe: a modelling study. 
+The Lancet. Planetary Health
+, 
+8
+(1), e30–e40. https://doi.org/10.1016/S2542-5196(23)00252-8
+Zhu, G., Liu, T., Xiao, J., Zhang, B., Song, T., Zhang, Y., Lin, L., Peng, Z., Deng, A., Ma, W., & Hao, Y. (2019). Effects of human mobility, temperature and mosquito control on the spatiotemporal transmission of dengue. 
+The Science of the Total Environment
+, 
+651
+(Pt 1), 969–978. https://doi.org/10.1016/j.scitotenv.2018.09.182

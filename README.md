@@ -1,6 +1,6 @@
 # CHIKV Thermal Response Functions
 
-This repository organizes temperature-dependent functions used to study chikungunya transmission risk. The current work checks individual thermal response functions, compares sources from the parameter table, and starts building the Mordecai-style baseline \(R_0(T)\) model for *Aedes aegypti* and *Aedes albopictus*.
+This repository organizes temperature-dependent functions used to study chikungunya transmission risk. The current work checks individual thermal response functions, compares sources from the parameter table, and builds a Mordecai-style baseline \(R_0(T)\) model for *Aedes aegypti* and *Aedes albopictus*.
 
 
 ## Baseline Model
@@ -32,28 +32,41 @@ where:
 ## Current Contents
 
 - Thermal response plots for each parameter.
-- Mordecai default functions for both *Ae. aegypti* and *Ae. albopictus*.
-- Separate relative \(R_0(T)\) plots for the two mosquito species.
+- Shared R thermal functions used by both the R Markdown report and Shiny app.
+- Mordecai baseline functions for both *Ae. aegypti* and *Ae. albopictus*.
+- Standardized relative \(R_0(T)\) plots for the two mosquito species.
+- Interactive Shiny app for comparing \(R_0(T)\) across thermal-function choices.
 - Source notes and parameter references from the latest thermal-functions table.
 
 ## Project Structure
 
 ```text
+R/         shared thermal response functions
 scripts/   R Markdown analysis and helper scripts
+interactive/ Shiny app for interactive R0 exploration
 figures/   generated plots
-output/    rendered reports and outputs
 docs/      project notes, parameter tables, and reference files
 ```
 
-## Interactive Plots
+## Interactive Shiny App
 
-[The CHIKV R0 Explorer](https://30-na.github.io/CHIKV/)
+[The CHIKV R0 Explorer](https://sinamokhtar.shinyapps.io/CHIKV/)
 
+The app lets users choose mosquito species, temperature range, and one thermal function for each model parameter. It always shows the Mordecai baseline as a dashed comparison curve.
 
+The plotted \(R_0(T)\) curves are standardized by the maximum raw \(R_0\) across all available function combinations for the selected species and temperature range. This makes curves comparable on a 0--1 scale.
 
-It lets users choose mosquito species, temperature range, and one thermal function for each model parameter. The app recalculates the curve directly and reports zeros or non-finite values instead of silently fixing them.
+To run locally:
+
+```r
+shiny::runApp("interactive")
+```
+
+Note: GitHub Pages cannot run Shiny apps directly. The online app link should point to a deployed Shiny service such as shinyapps.io or Posit Connect.
 
 ## Main Files
 
+- `R/thermal_functions.R`: Shared thermal-response functions.
 - `scripts/Temp_functions.Rmd`: Main thermal-function analysis.
-- `docs/Thermal_functions_table_6-12-26b.docx`: Latest parameter/source table.
+- `interactive/app.R`: Shiny app for interactive \(R_0(T)\) exploration.
+- `docs/Thermal_functions_table_6-22-26.docx`: Latest parameter/source table.

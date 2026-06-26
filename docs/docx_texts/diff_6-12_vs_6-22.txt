@@ -1,0 +1,55 @@
+ADDED LINES:
+ / MDR
+Converted
+Ae
+.
+ albopictus
+Ae
+.
+ albopictus
+N/A
+Converted
+Ae
+.
+ albopictus
+N/A
+Converted
+(Huber et al., 2018; Mordecai et 
+al., 2017; Ryan et al., 2019)
+
+REMOVED LINES:
+Aquatic Mortality
+Egg Hatching
+(Gondim et al., 2026)
+(Valdez et al., 2018)
+(Liu et al., 2020a, 2020b)
+(Valdez et al., 2018)
+Egg Maturation Duration
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+Egg 
+M
+ortality
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+Egg 
+Survival Duration
+Gonotrophic Cycle Duration
+(Riou et al., 2017)
+(Carrington et al., 2013)
+(Carrington et al., 2013)
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024; Zardini et al., 2024)
+Larvae Mortality
+ Rate
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+Larvae 
+Survival Duration
+Larvae Maturation 
+Duration
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+Larvae Maturation Rate
+Pupae Maturation 
+Duration
+(Guzzetta et al., 2016; Nadim et al., 2025; Poletti et al., 2011; Sloof et al., 2024)
+Pupae Mortality Rate
+Carrington, L. B., Armijos, M. V., Lambrechts, L., Barker, C. M., & Scott, T. W. (2013). Effects of fluctuating daily temperatures at critical thermal extremes on Aedesaegypti life-history traits. 
+PLOS ONE
+(3).
