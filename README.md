@@ -32,11 +32,8 @@ where:
 ## Current Contents
 
 - Thermal response plots for each parameter.
-- Shared R thermal functions used by both the R Markdown report and Shiny app.
 - Mordecai baseline functions for both *Ae. aegypti* and *Ae. albopictus*.
-- Standardized relative \(R_0(T)\) plots for the two mosquito species.
 - Interactive Shiny app for comparing \(R_0(T)\) across thermal-function choices.
-- Source notes and parameter references from the latest thermal-functions table.
 
 ## Project Structure
 
