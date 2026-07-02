@@ -1,0 +1,17 @@
+"species","parameter","percent_change_R0"
+"Ae. aegypti","a",10
+"Ae. albopictus","a",10
+"Ae. aegypti","b",4.88088481701516
+"Ae. albopictus","b",4.88088481701516
+"Ae. aegypti","c",4.88088481701516
+"Ae. albopictus","c",4.88088481701516
+"Ae. aegypti","EFD",4.88088481701516
+"Ae. albopictus","EFD",4.88088481701516
+"Ae. aegypti","lf",17.540637475923
+"Ae. albopictus","lf",16.7813414660308
+"Ae. aegypti","MDR",4.88088481701516
+"Ae. albopictus","MDR",4.88088481701516
+"Ae. aegypti","PDR",1.8823641357918
+"Ae. albopictus","PDR",1.22421837252303
+"Ae. aegypti","pEA",4.88088481701516
+"Ae. albopictus","pEA",4.88088481701516

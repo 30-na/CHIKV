@@ -1,0 +1,17 @@
+"species","peak_temp","parameter","percent_change_R0"
+"Ae. aegypti",29,"a",10
+"Ae. aegypti",29,"b",4.88088481701516
+"Ae. aegypti",29,"c",4.88088481701515
+"Ae. aegypti",29,"lf",16.7861175158128
+"Ae. aegypti",29,"PDR",1.22835817687899
+"Ae. aegypti",29,"EFD",4.88088481701516
+"Ae. aegypti",29,"pEA",4.88088481701516
+"Ae. aegypti",29,"MDR",4.88088481701516
+"Ae. albopictus",26.1,"a",10
+"Ae. albopictus",26.1,"b",4.88088481701516
+"Ae. albopictus",26.1,"c",4.88088481701516
+"Ae. albopictus",26.1,"lf",15.6596363930821
+"Ae. albopictus",26.1,"PDR",0.25194216959256
+"Ae. albopictus",26.1,"EFD",4.88088481701516
+"Ae. albopictus",26.1,"pEA",4.88088481701516
+"Ae. albopictus",26.1,"MDR",4.88088481701516
